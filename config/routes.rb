@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   get  '/signup',  to: 'users#new'
   resources :users
   resources :account_activations
+  resources :cars
 end

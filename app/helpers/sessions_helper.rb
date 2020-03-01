@@ -30,6 +30,10 @@ module SessionsHelper
     current_user.present?
   end
 
+  def admin?
+    return true if current_user.present? && current_user.admin == true
+  end
+
   def forget(user)
     user.forget
     cookies.delete(:user_id)

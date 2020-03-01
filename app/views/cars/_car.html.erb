@@ -1,0 +1,12 @@
+<li id="cars-<%= car.id %>">
+  <span class="user">Mod :  <%= link_to car.user.name, car.user %></span><br>
+  <span class="content">Tên xe : <%= car.name %></span><br>
+  <span class="Gia">Tên xe : <%= car.price %></span><br>
+  <span class="color">Tên xe : <%= car.color %></span><br>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(car.created_at) %> ago.
+      <%= link_to "edit",edit_car_url(car) %>
+      <%= link_to "delete", car, method: :delete,
+                                       data: { confirm: "You sure?" } %>
+  </span>
+</li> 
