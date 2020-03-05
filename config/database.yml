@@ -1,23 +1,19 @@
-development:
+default: &default
   adapter: postgresql
   encoding: unicode
-  database: rencar_development
   pool: 5
+  timeout: 5000
   username: quang_huy
-  password: q12122211234
+  password: <%= ENV['passpg'] %>
+
+development:
+  <<: *default
+  database: rencar_development
 
 test:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
   database: rentcar_test
-  pool: 5
-  username: quang_huy
-  password: q12122211234
 
 production:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
   database: rentcar_production
-  pool: 5
-  username: quang_huy
-  password: q12122211234
