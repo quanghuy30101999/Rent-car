@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
+
+  get 'password_resets/edit'
+
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
@@ -8,4 +12,5 @@ Rails.application.routes.draw do
   resources :users
   resources :account_activations
   resources :cars
+  resources :password_resets
 end
