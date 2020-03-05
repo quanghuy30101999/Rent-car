@@ -4,7 +4,7 @@ default: &default
   pool: 5
   timeout: 5000
   username: quang_huy
-  password: <%= ENV['passpg'] %>
+  password: q12122211234
 
 development:
   <<: *default
