@@ -9,7 +9,7 @@
       </section>
     </aside>
         <div class="col-md-8">
-      <h3>Micropost Feed</h3>
+      <h3>Car Feed</h3>
       <%= render 'shared/feed' %>
     </div>
   </div>
@@ -19,5 +19,8 @@
 
     <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
   </div>
-
+  <div class="center jumbotron">
+  <%= render 'shared/feed' %>
+  </div>
+</nav>
 <% end %>
