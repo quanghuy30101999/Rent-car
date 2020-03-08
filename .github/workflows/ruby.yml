@@ -25,10 +25,23 @@ jobs:
       uses: actions/setup-ruby@v1
       with:
         ruby-version: 2.6.5
+    - name: Install required apt packages and bundler
+      run: |
+        sudo apt-get -y install libpq-dev
+        gem install bundler
+    - name: Cache gems
+      uses: actions/cache@v1
+      env:
+        cache-name: cache-gems
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
     - name: Bundle install
       run: |
-        sudo apt-get -yqq install libpq-dev
-        gem install bundler
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
     - name: Test with rake
@@ -45,6 +58,7 @@ jobs:
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_USERNAME: Slack Success Notification
+        SLACK_ICON: https://lh3.googleusercontent.com/proxy/M1u6pfKR5bgxtrycIw9jLKi6MTOaORzivZ94s6PJEIcY8ZiIMKbFV90KYoXwscovhKuWfzBZL7KODCgNUDaXJRq5As8OJPRqKKhyg9hI
     - name: Slack Failure Notification
       uses: rtCamp/action-slack-notify@v2.0.0
       if: failure()
@@ -52,3 +66,4 @@ jobs:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_USERNAME: Slack Failure Notification
         SLACK_COLOR: FF0000
+        SLACK_ICON: https://lh3.googleusercontent.com/proxy/M1u6pfKR5bgxtrycIw9jLKi6MTOaORzivZ94s6PJEIcY8ZiIMKbFV90KYoXwscovhKuWfzBZL7KODCgNUDaXJRq5As8OJPRqKKhyg9hI
