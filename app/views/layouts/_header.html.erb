@@ -4,10 +4,13 @@
     <%= form_tag(search_page_path, :method => "get",class: 'navbar-form navbar-left') do %>
       <div class="input-group">
         <%= search_field_tag :search, params[:search], placeholder: "Search", class: "form-control" %>
+        
+        <%= select_tag :search5, options_for_select((01..31)), {:class => 'form-control', :prompt => 'Ngày mượn'} %>
+        <%= select_tag :search4, options_for_select((01..31)), {:class => 'form-control', :prompt => 'Ngày trả'} %>
         <div class="input-group-btn">
           <%= button_tag "", :class => 'btn btn-info glyphicon glyphicon-search',:name => nil%>
         </div>
-      </div>
+      </div>      
       <% end %>
     <nav>
       <ul class="nav navbar-nav navbar-right">

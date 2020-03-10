@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   get  '/help',    to: 'static_pages#help'
   get  '/signup',  to: 'users#new'
-  get  '/search' => 'static_pages#index', :as => 'search_page'  
+  get  '/search' => 'static_pages#index', :as => 'search_page'
   resources :users
   resources :account_activations
   resources :cars
