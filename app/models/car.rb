@@ -7,4 +7,6 @@ class Car < ApplicationRecord
   validates :color, presence: true
   validates :price, presence: true,
             numericality: { only_integer: true }
+  enum status: { available: 'available', ordered: 'ordered', rented: 'rented' }
+  validates :status,        presence: true, inclusion: {in: %w(available ordered rented)}
 end
