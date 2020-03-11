@@ -4,7 +4,7 @@ class CarTest < ActiveSupport::TestCase
 
   def setup
     @user = users(:michael)
-    @car = @user.cars.build(name: "Lorem ipsum",year: "1990",color: "red", price: 1000, user_id: @user.id)
+    @car = @user.cars.build(name: "Lorem ipsum",year: "1990",color: "red", price: 1000,user_id: @user.id)
   end
 
   test "should be valid" do

@@ -31,11 +31,7 @@ module SessionsHelper
   end
 
   def admin?
-    return true if current_user.present? && current_user.admin == true
-  end
-
-  def seach_admin
-    User.find_by(admin: true)  
+    current_user.present? && current_user.admin
   end
 
   def forget(user)

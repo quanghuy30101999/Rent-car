@@ -1,7 +1,7 @@
-<%= form_for(@car) do |f| %>
+<%= form_for(@cars) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
-    <%= f.text_area :name, placeholder: "Compose new micropost..." %>
+    <%= f.text_area :name%>
     <%= f.text_area :year %>
     <%= f.text_area :color %>
     <%= f.text_area :price %>

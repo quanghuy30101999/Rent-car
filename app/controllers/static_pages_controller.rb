@@ -1,10 +1,10 @@
 class StaticPagesController < ApplicationController
   def home
     if logged_in?
-      @car  = current_user.cars.build
+      @cars  = current_user.cars.build
       @feed_items = current_user.feed
     else
-      @feed_items = seach_admin.feed
+      @feed_items = Car.all
     end
   end
 end
