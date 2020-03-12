@@ -6,6 +6,11 @@
         <%= @user.name %>
       </h1>
     </section>
+    <% if logged_in? && admin? %>
+    <section class="car_form">
+        <%= render "shared/car_form" %>
+      </section>
+    <% end %>
   </aside>
   <div class="col-md-8">
     <% if @user.cars.any? %>

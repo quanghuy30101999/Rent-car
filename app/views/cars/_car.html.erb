@@ -5,9 +5,9 @@
   <span class="color">Màu : <%= car.color %></span><br>
   <span class="timestamp">
     Posted <%= time_ago_in_words(car.created_at) %> ago.
-      <%= link_to "edit",edit_car_url(car) %>
+      <%= link_to "edit", edit_car_url(car) %>
       <%= link_to "delete", car, method: :delete,
-                                       data: { confirm: "You sure?" } %>
+                                 data: { confirm: "You sure?" } %>
   </span>
 </li>
 <hr>

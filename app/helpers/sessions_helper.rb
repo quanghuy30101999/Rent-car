@@ -31,7 +31,7 @@ module SessionsHelper
   end
 
   def admin?
-    current_user.present? && current_user.admin
+    current_user&.admin || false
   end
 
   def forget(user)

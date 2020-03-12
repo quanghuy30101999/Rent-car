@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
-
   def show
-    @user = User.find(params[:id])
-    @cars = @user.cars #.paginate(page: params[:page])
+    if logged_in?
+      @user = User.find(params[:id])
+      @car = current_user.cars.build
+      @cars = Car.all
+    end
   end
 
   def new
@@ -16,10 +18,9 @@ class UsersController < ApplicationController
       flash[:info] = "Please check your email to activate your account."
       redirect_to root_url
     else
-      render 'new'
+      render "new"
     end
   end
-
 
   def edit
     @user = User.find(params[:id])
@@ -31,14 +32,14 @@ class UsersController < ApplicationController
       flash[:success] = "Profile updated"
       redirect_to @user
     else
-      render 'edit'
+      render "edit"
     end
   end
 
   private
 
-    def user_params
-      params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation)
-    end
+  def user_params
+    params.require(:user).permit(:name, :email, :password,
+                                 :password_confirmation)
+  end
 end

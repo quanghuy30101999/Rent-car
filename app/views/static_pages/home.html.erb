@@ -1,24 +1,4 @@
-<% if logged_in? && admin?  %>
-  <div class="row">
-    <aside class="col-md-4">
-      <section class="user_info">
-        <%= render 'shared/user_info' %>
-      </section>
-      <section class="car_form">
-        <%= render 'shared/car_form' %>
-      </section>
-    </aside>
-        <div class="col-md-8">
-      <h3>Car Feed</h3>
-      <%= render 'shared/feed' %>
-    </div>
-  </div>
-<% else %>
-  <div class="center jumbotron">
-    <h1>Welcome to the Rent Car</h1>
-
-    <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
-  </div>
-  <%= render 'shared/feed' %>
-</nav>
-<% end %>
+<div class="center jumbotron">
+  <h1>Welcome to the Rent Car</h1>
+</div>
+<%= render "shared/feed" %>
