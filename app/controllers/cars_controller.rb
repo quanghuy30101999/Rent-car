@@ -9,6 +9,8 @@ class CarsController < ApplicationController
       redirect_to current_user
     else
       @feed_items = []
+      @user = current_user
+      @cars = Car.all
       render "users/show"
     end
   end
@@ -16,7 +18,7 @@ class CarsController < ApplicationController
   def destroy
     @car.destroy
     flash[:success] = "Car deleted"
-    redirect_to request.referrer || root_url
+    redirect_to current_user
   end
 
   def edit
