@@ -2,6 +2,23 @@ class CarsController < ApplicationController
   before_action :logged_in_user, only: [:create, :edit, :update, :destroy]
   before_action :correct_user, only: [:destroy, :update, :edit]
 
+  def index
+    @car = Car.all
+    @parameter = params[:search].downcase
+    @parameter1 = params[:search].to_i
+    @car = @car.where("lower(name) LIKE :search OR year LIKE :search OR color LIKE :search", search: "%#{@parameter}%") if params[:search].present?
+    #@car = @car.where("color LIKE :search", search: "%#{@parameter}%") if params[:search].present?
+    d = params[:search2].to_datetime
+    @b = @car.where("begin IS NULL") if params[:search1].present? && params[:search2].present?
+    @c = @car.where("status = '#{"rented"}'") if params[:search1].present? && params[:search2].present?
+    a = params[:search1].to_datetime
+    @c = @c.where("cars.end > ?", d)
+    @b += @c
+    @car = @b
+    @feed_items = @car
+    render "static_pages/home"
+  end
+
   def create
     @car = current_user.cars.build(car_params)
     if @car.save
