@@ -10,7 +10,7 @@
     <label> Price </label>
     <span>
       <%= f.text_field :price %> 
-      <%= select_tag :search3, options_for_select(["VND", "USD"]), { :class => "form-control", :prompt => "" } %>
+      <%= f.select :price_unit, options_for_select(["VND", "USD"]), { :class => "form-control", :prompt => "Select One" } %>
     </span>
   </div>
   <%= f.submit btn, class: "btn btn-primary" %>
