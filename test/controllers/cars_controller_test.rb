@@ -38,7 +38,6 @@ class CarsControllerTest < ActionDispatch::IntegrationTest
                                       price: 1000 } }
     end
     assert_redirected_to @user
-    follow_redirect!
     assert_not flash.empty?
   end
 

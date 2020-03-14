@@ -1,8 +1,12 @@
 <li id="cars-<%= car.id %>">
-  <span class="name">Tên xe : <%= car.name %></span><br>
-  <span class="year">Năm  : <%= car.year %></span><br>
-  <span class="price">Gía : <%= car.price %></span><br>
-  <span class="color">Màu : <%= car.color %></span><br>
+  <span class="name">Name : <%= car.name %></span><br>
+  <span class="year">Year  : <%= car.year %></span><br>
+  <% if car.price_unit == "USD" %>
+    <span class="price">Price : <%= car.price %>$</span><br>
+  <% else %>
+    <span class="price">Price : <%= car.price %>đ</span><br>
+  <% end %>
+  <span class="color">Color : <%= car.color %></span><br>
   <span class="timestamp">
     <% if logged_in? && admin? %>
       Posted <%= time_ago_in_words(car.created_at) %> ago.

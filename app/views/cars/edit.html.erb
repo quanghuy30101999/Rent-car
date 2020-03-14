@@ -1,10 +1,1 @@
-<%= form_for (@car) do |f| %>
-  <%= render "shared/error_messages", object: f.object %>
-  <div class="field">
-    <%= f.text_field :name %>
-    <%= f.text_field :year %>
-    <%= f.text_field :color %>
-    <%= f.text_field :price %>
-  </div>
-  <%= f.submit "Update", class: "btn btn-primary" %>
-<% end %>
+<%= render partial: "shared/car_form", locals: { btn: "Update" } %>

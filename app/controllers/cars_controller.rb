@@ -4,11 +4,12 @@ class CarsController < ApplicationController
 
   def create
     @car = current_user.cars.build(car_params)
+    @car.price_unit = params[:search3]
+    byebug
     if @car.save
       flash[:success] = "Car created!"
       redirect_to current_user
     else
-      @feed_items = []
       @user = current_user
       @cars = Car.all
       render "users/show"

@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
+  before_action :logged_in_user, except: %i[create new]
+
   def show
-    if logged_in?
-      @user = User.find(params[:id])
-      @car = current_user.cars.build
-      @cars = Car.all
-    end
+    @user = User.find(params[:id])
+    @car = current_user.cars.build
+    @cars = Car.all
   end
 
   def new
