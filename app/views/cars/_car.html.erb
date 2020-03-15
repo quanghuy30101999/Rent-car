@@ -1,7 +1,7 @@
 <li id="cars-<%= car.id %>">
   <span class="name">Name : <%= car.name %></span><br>
   <span class="year">Year  : <%= car.year %></span><br>
-  <span class="price">Price : <%= car.price %><%= price_unit(car) %></span><br>
+  <span>Price :<%= format_currency(car.price, car.price_unit) %></span><br>
   <span class="color">Color : <%= car.color %></span><br>
   <span class="timestamp">
     <% if logged_in? && admin? %>
