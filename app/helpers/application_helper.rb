@@ -11,12 +11,12 @@ module ApplicationHelper
   end
 
   def format_currency(price, price_unit)
-    price_units = "đ"
+    price_symbol = "đ"
     if price_unit == "USD"
-      price_units = "$"
-      format_currency = price.to_s + price_units
+      price_symbol = "$"
+      currency = price_symbol + price.to_s
     else
-      format_currency = price.to_s + price_units
+      currency = price.to_s + price_symbol
     end
   end
 end
