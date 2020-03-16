@@ -11,4 +11,18 @@ class Car < ApplicationRecord
   validates :status, presence: true, inclusion: { in: %w(available ordered rented) }
   enum price_unit: { VND: "VND", USD: "USD" }
   validates :price_unit, presence: true, inclusion: { in: %w(VND USD) }
+
+  def self.search(params)
+    car = Car.all
+    car = car.where("lower(name) LIKE :search OR lower(color) LIKE :search OR lower(year) LIKE :search", search: "%#{params[:search].downcase}%") if params[:search].present?
+    if params[:search].blank?
+      car = car.where("lower(name) LIKE :search OR lower(color) LIKE :search OR lower(year) LIKE :search", search: "%#{params[:search].downcase}%")
+    end
+    a = car.where("cars.begin is null") if params[:search1].present? && params[:search2].present?
+    b = car.where("cars.begin is not null") if params[:search1].present? && params[:search2].present?
+    b = b.where("cars.end <= ? OR cars.begin >= ?", params[:search1].to_date, params[:search2].to_date) if params[:search1].present? && params[:search2].present?
+    a += b if params[:search1].present? && params[:search2].present?
+    car = a if params[:search1].present? && params[:search2].present?
+    car
+  end
 end

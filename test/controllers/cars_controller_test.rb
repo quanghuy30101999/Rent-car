@@ -92,4 +92,27 @@ class CarsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_template "edit"
   end
+
+  test "get all" do
+    get search_path, params: { search: "", search1: "", search2: "" }
+    assert_select "h5", 5
+    assert_template "static_pages/home"
+  end
+
+  test "get with name,year,color" do
+    get search_path, params: { search: "Toyota", search1: "", search2: "" }
+    assert_select "h5", 2
+    assert_template "static_pages/home"
+  end
+
+  test "get with day" do
+    get search_path, params: { search: "", search1: "2020-03-04", search2: "2020-03-08" }
+    assert_select "h5", 4
+    assert_template "static_pages/home"
+  end
+  test "get with day,name,year,color" do
+    get search_path, params: { search: "Toyota", search1: "2020-03-04", search2: "2020-03-08" }
+    assert_select "h5", 1
+    assert_template "static_pages/home"
+  end
 end
