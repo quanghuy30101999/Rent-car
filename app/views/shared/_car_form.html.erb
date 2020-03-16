@@ -1,0 +1,17 @@
+<%= form_for(@car) do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+  <div class="field">
+  <label> Name </label>
+    <%= f.text_field :name %>
+    <label> Year </label>
+    <%= f.text_field :year %>
+    <label> Color </label>
+    <%= f.text_field :color %>
+    <label> Price </label>
+    <span>
+      <%= f.text_field :price %> 
+      <%= f.select :price_unit, options_for_select(["VND", "USD"]), { :class => "form-control", :prompt => "Select One" } %>
+    </span>
+  </div>
+  <%= f.submit btn, class: "btn btn-primary" %>
+<% end %>

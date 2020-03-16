@@ -5,3 +5,8 @@ User.create!(name:  "Tran Quang Huy",
              admin:     true,
              activated: true,
              activated_at: Time.zone.now)
+Car.create!(name: "MARDA",
+            year: "1990",
+            color: "RED",
+            price: 1000,
+            user_id: 1)

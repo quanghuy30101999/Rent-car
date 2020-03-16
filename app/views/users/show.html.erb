@@ -6,5 +6,17 @@
         <%= @user.name %>
       </h1>
     </section>
+    
+      <section class="car_form">
+        <%= render partial: "shared/car_form", locals: { btn: "Post" } %>
+      </section>
   </aside>
+  <div class="col-md-8">
+    <% if @user.cars.any? %>
+      <h3>Cars (<%= @user.cars.count %>)</h3>
+      <ol class="microposts">
+        <%= render @cars %>
+      </ol>
+    <% end %>
+  </div>
 </div>

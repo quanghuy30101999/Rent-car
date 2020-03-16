@@ -1,7 +1,5 @@
 class StaticPagesController < ApplicationController
   def home
-  end
-
-  def help
+    @feed_items = Car.all
   end
 end

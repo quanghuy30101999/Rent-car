@@ -30,6 +30,10 @@ module SessionsHelper
     current_user.present?
   end
 
+  def admin?
+    current_user&.admin || false
+  end
+
   def forget(user)
     user.forget
     cookies.delete(:user_id)
