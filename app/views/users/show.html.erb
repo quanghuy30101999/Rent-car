@@ -7,11 +7,9 @@
       </h1>
     </section>
     
-    <% if logged_in? && admin? %>
       <section class="car_form">
         <%= render partial: "shared/car_form", locals: { btn: "Post" } %>
       </section>
-    <% end %>
   </aside>
   <div class="col-md-8">
     <% if @user.cars.any? %>
