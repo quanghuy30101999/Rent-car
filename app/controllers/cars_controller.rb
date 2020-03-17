@@ -3,8 +3,8 @@ class CarsController < ApplicationController
   before_action :correct_user, only: [:destroy, :update, :edit]
 
   def index
-    @car = Car.search(params)
-    @feed_items = @car
+    @cars = Car.search(params)
+    @feed_items = @cars
     render "static_pages/home"
   end
 

@@ -93,26 +93,38 @@ class CarsControllerTest < ActionDispatch::IntegrationTest
     assert_template "edit"
   end
 
-  test "get all" do
-    get search_path, params: { search: "", search1: "", search2: "" }
-    assert_select "h5", 5
+  test "get cars all" do
+    get search_path, params: { search: "", DateRent: "", DateReturn: "" }
+    assert_select "h5" do
+      assert_select "span#name"
+      assert_select "span", 5
+    end
     assert_template "static_pages/home"
   end
 
-  test "get with name,year,color" do
-    get search_path, params: { search: "Toyota", search1: "", search2: "" }
-    assert_select "h5", 2
+  test "get cars with name,year,color" do
+    get search_path, params: { search: "Toyota", DateRent: "", DateReturn: "" }
+    assert_select "h5" do
+      assert_select "span#name"
+      assert_select "span", 2
+    end
     assert_template "static_pages/home"
   end
 
-  test "get with day" do
+  test "get cars with day" do
     get search_path, params: { search: "", DateRent: "2020-03-04", DateReturn: "2020-03-08" }
-    assert_select "h5", 4
+    assert_select "h5" do
+      assert_select "span#name"
+      assert_select "span", 4
+    end
     assert_template "static_pages/home"
   end
-  test "get with day,name,year,color" do
+  test "get cars with day,name,year,color" do
     get search_path, params: { search: "Toyota", DateRent: "2020-03-04", DateReturn: "2020-03-08" }
-    assert_select "h5", 1
+    assert_select "h5" do
+      assert_select "span#name"
+      assert_select "span", 1
+    end
     assert_template "static_pages/home"
   end
 end
