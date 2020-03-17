@@ -15,14 +15,11 @@ class Car < ApplicationRecord
   def self.search(params)
     car = Car.all
     car = car.where("lower(name) LIKE :search OR lower(color) LIKE :search OR lower(year) LIKE :search", search: "%#{params[:search].downcase}%") if params[:search].present?
-    if params[:search].blank?
-      car = car.where("lower(name) LIKE :search OR lower(color) LIKE :search OR lower(year) LIKE :search", search: "%#{params[:search].downcase}%")
-    end
-    a = car.where("cars.begin is null") if params[:search1].present? && params[:search2].present?
-    b = car.where("cars.begin is not null") if params[:search1].present? && params[:search2].present?
-    b = b.where("cars.end <= ? OR cars.begin >= ?", params[:search1].to_date, params[:search2].to_date) if params[:search1].present? && params[:search2].present?
-    a += b if params[:search1].present? && params[:search2].present?
-    car = a if params[:search1].present? && params[:search2].present?
+    car_available = car.where("cars.begin is null") if params[:DateRent].present? && params[:DateReturn].present?
+    car_rented = car.where("cars.begin is not null") if params[:DateRent].present? && params[:DateReturn].present?
+    car_rented = car_rented.where("cars.end <= ? OR cars.begin >= ?", params[:DateRent].to_date, params[:DateReturn].to_date) if params[:DateRent].present? && params[:DateReturn].present?
+    car_available += car_rented if params[:DateRent].present? && params[:DateReturn].present?
+    car = car_available if params[:DateRent].present? && params[:DateReturn].present?
     car
   end
 end
