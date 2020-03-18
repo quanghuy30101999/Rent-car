@@ -8,6 +8,10 @@ class CarsController < ApplicationController
     render "static_pages/home"
   end
 
+  def show
+    @car = Car.find_by(id: params[:id])
+  end
+
   def create
     @car = current_user.cars.build(car_params)
     if @car.save

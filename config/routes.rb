@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get "/search", to: "cars#index"
   resources :users
   resources :account_activations
-  resources :cars
+  resources :cars do
+    resources :orders
+  end
   resources :password_resets
 end

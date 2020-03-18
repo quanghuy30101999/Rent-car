@@ -14,7 +14,7 @@
         <%= link_to "edit", edit_car_url(car) %>
         <%= link_to "delete", car, method: :delete,
                                    data: { confirm: "You sure?" } %>
-        <a href="#" class="btn btn-primary">Detail</a>
+        <%= link_to "Detail", car_path(car), class: "btn btn-primary" %>
   </div>
 </div>
 </li>

@@ -1,0 +1,26 @@
+<%= form_for(@order, url: car_orders_url) do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+  <div class="row">
+    <aside class="col-md-4">
+      <div class="form-group">
+          <label> Name </label>
+          <%= f.text_field :name %>
+          <label> Email </label>
+          <%= f.text_field :email %>
+      </div>
+      
+      <div class="form-group">
+          <label> Rent Date </label>
+          <%= f.datetime_select :rent_time, id: :rent_time, :default => { :hour => Time.zone.now.hour, :minute => Time.zone.now.min } %>
+       </div>
+       <div class="form-group">   
+          <label> Return Date </label>
+          <%= f.datetime_select :return_time, id: :return_time, :default => { :hour => Time.zone.now.hour, :minute => Time.zone.now.min } %>
+      </div>
+      <br>
+      <div class="form-group">
+        <%= f.submit "Order", class: "btn btn-primary" %>
+      </div>
+    </aside>
+  </div>
+<% end %>
