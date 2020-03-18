@@ -94,7 +94,7 @@ class CarsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "get cars all" do
-    get search_path, params: { search: "", DateRent: "", DateReturn: "" }
+    get search_path, params: { search: "", date_rent: "", date_return: "" }
     assert_select "h5" do
       assert_select "span#name"
       assert_select "span", 5
@@ -103,7 +103,7 @@ class CarsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "get cars with name,year,color" do
-    get search_path, params: { search: "Toyota", DateRent: "", DateReturn: "" }
+    get search_path, params: { search: "Toyota", date_rent: "", date_return: "" }
     assert_select "h5" do
       assert_select "span#name"
       assert_select "span", 2
@@ -112,7 +112,7 @@ class CarsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "get cars with day" do
-    get search_path, params: { search: "", DateRent: "2020-03-04", DateReturn: "2020-03-08" }
+    get search_path, params: { search: "", date_rent: "2020-03-04", date_return: "2020-03-08" }
     assert_select "h5" do
       assert_select "span#name"
       assert_select "span", 4
@@ -120,7 +120,7 @@ class CarsControllerTest < ActionDispatch::IntegrationTest
     assert_template "static_pages/home"
   end
   test "get cars with day,name,year,color" do
-    get search_path, params: { search: "Toyota", DateRent: "2020-03-04", DateReturn: "2020-03-08" }
+    get search_path, params: { search: "Toyota", date_rent: "2020-03-04", date_return: "2020-03-08" }
     assert_select "h5" do
       assert_select "span#name"
       assert_select "span", 1
