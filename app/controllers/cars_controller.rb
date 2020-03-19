@@ -2,6 +2,12 @@ class CarsController < ApplicationController
   before_action :logged_in_user, only: [:create, :edit, :update, :destroy]
   before_action :correct_user, only: [:destroy, :update, :edit]
 
+  def index
+    @cars = Car.search(params)
+    @feed_items = @cars
+    render "static_pages/home"
+  end
+
   def create
     @car = current_user.cars.build(car_params)
     if @car.save

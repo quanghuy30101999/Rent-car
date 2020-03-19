@@ -233,3 +233,12 @@ span.picture {
     border: 0;
   }
 }
+
+.container{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.card{
+  width: 25rem;
+}

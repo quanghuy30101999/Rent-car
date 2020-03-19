@@ -1,15 +1,21 @@
 <li id="cars-<%= car.id %>">
-  <span class="name">Name : <%= car.name %></span><br>
-  <span class="year">Year  : <%= car.year %></span><br>
-  <span>Price :<%= format_currency(car.price, car.price_unit) %></span><br>
-  <span class="color">Color : <%= car.color %></span><br>
-  <span class="timestamp">
-    <% if logged_in? && admin? %>
-      Posted <%= time_ago_in_words(car.created_at) %> ago.
+  <div class="card">
+  <div class="card-body">
+    <h5 class="card-title"><span id="name">Name : <%= car.name %></span><br></h5>
+    <p class="card-text"><span class="year">Year  : <%= car.year %></span><br>
+      <span>Price :<%= format_currency(car.price, car.price_unit) %></span><br>
+      <span class="color">Color : <%= car.color %></span><br>
+      <span class="begin">Date Rent : <%= car.begin %></span><br>
+      <span class="end">Date Return : <%= car.end %></span><br>
+      <span class="timestamp">
+        Posted <%= time_ago_in_words(car.created_at) %> ago.
+      </span>
+    </p>
         <%= link_to "edit", edit_car_url(car) %>
         <%= link_to "delete", car, method: :delete,
                                    data: { confirm: "You sure?" } %>
-    <% end %>
-  </span>
+        <a href="#" class="btn btn-primary">Detail</a>
+  </div>
+</div>
 </li>
 <hr>
