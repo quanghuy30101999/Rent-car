@@ -17,8 +17,7 @@ class Car < ApplicationRecord
     cars = cars.where("lower(name) LIKE :search OR lower(color) LIKE :search OR lower(year) LIKE :search", search: "%#{params[:search].downcase}%") if params[:search].present?
     if params[:date_rent].present? && params[:date_return].present?
       car_available = cars.where("cars.begin is null")
-      car_rented = cars.where("cars.begin is not null")
-      car_rented = car_rented.where("cars.end <= ? OR cars.begin >= ?", params[:date_rent].to_date, params[:date_return].to_date)
+      cars_rented = cars.where("cars.begin is not null and cars.end <= ? OR cars.begin >= ?", params[:date_rent].to_date, params[:date_return].to_date)
       car_available += car_rented
       cars = car_available
     end
