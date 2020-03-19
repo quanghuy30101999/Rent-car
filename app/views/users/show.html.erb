@@ -19,4 +19,13 @@
       </ol>
     <% end %>
   </div>
+
+  <div class="col-md-8">
+    <% if @user.orders.any? %>
+      <h3>Orders (<%= @user.orders.count %>)</h3>
+      <ol class="cars">
+        <%= render @user.orders %>
+      </ol>
+    <% end %>
+  </div>
 </div>

@@ -1,0 +1,15 @@
+<li id="order-<%= order.id %>">
+  <span class="name_guest"> <label>Name:</label>
+    <%= order.name %></span></br>
+    <span class="address"><label>Email:</label>
+    <%= order.email %></span></br>
+    <span class="checkin_time"><label>Checkin Time:</label>
+    <span class="rental_period"><label>Rental Period:</label>
+    <span class="order_status"> <label>Order Status:</label>
+    <span class="timestamp"><label>Posted</label>
+  <%= time_ago_in_words(order.created_at) %> ago.
+</span>
+</li>
+<span class="delete">
+  <p> <%= link_to "Cancel", [order.car, order], method: :delete, data: { confirm: "Are you sure" } %> </p>
+</span>

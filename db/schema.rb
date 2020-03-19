@@ -10,16 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200318074609) do
+ActiveRecord::Schema.define(version: 20200319092948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "add_rent_time_to_orders", force: :cascade do |t|
-    t.datetime "rent_time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "cars", force: :cascade do |t|
     t.string "name"
@@ -47,6 +41,7 @@ ActiveRecord::Schema.define(version: 20200318074609) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "rent_time"
+    t.string "orders_status", default: "requesting"
     t.index ["car_id"], name: "index_orders_on_car_id"
     t.index ["user_id", "created_at"], name: "index_orders_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_orders_on_user_id"

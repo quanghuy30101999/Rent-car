@@ -14,9 +14,15 @@ module ApplicationHelper
     price_symbol = "đ"
     if price_unit == "USD"
       price_symbol = "$"
-      currency = price_symbol + price.to_s
+      "#{price_symbol}#{price}"
     else
-      currency = price.to_s + price_symbol
+      "#{price}#{price_symbol}"
+    end
+  end
+
+  def user_oreded?(car_id)
+    current_user.orders.any? do |order|
+      order.car_id == car_id
     end
   end
 end

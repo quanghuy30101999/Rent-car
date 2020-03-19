@@ -12,10 +12,18 @@ class OrdersController < ApplicationController
     if @order.save
       @car.save
       flash[:success] = "Order created!"
-      redirect_to @car
+      redirect_to current_user
     else
       render "orders/new"
     end
+  end
+
+  def destroy
+    @car = Car.find(params[:car_id])
+    @order = @car.orders.destroy(params[:id])
+    @car.update status: "available"
+    flash[:success] = "Order deleted"
+    redirect_to current_user
   end
 
   private

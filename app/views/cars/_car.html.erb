@@ -11,10 +11,14 @@
         Posted <%= time_ago_in_words(car.created_at) %> ago.
       </span>
     </p>
-        <%= link_to "edit", edit_car_url(car) %>
-        <%= link_to "delete", car, method: :delete,
+        <%= link_to "edit", edit_car_url(car), class: "btn btn-primary" %>
+        <%= link_to "delete", car, class: "btn btn-primary", method: :delete,
                                    data: { confirm: "You sure?" } %>
-        <%= link_to "Detail", car_path(car), class: "btn btn-primary" %>
+        <% if !logged_in? %>
+          <%= link_to "Detail", login_url, class: "btn btn-primary" %>
+        <% else %>
+          <%= link_to "Detail", car_path(car), class: "btn btn-primary" %>
+        <% end %>
   </div>
 </div>
 </li>
