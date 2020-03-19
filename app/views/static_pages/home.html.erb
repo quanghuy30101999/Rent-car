@@ -7,11 +7,10 @@
   <%= form_tag(search_path, :method => "get", class: "form-inline") do %>
         <div class = "col-md-6">  
         <p><%= search_field_tag :search, params[:search], placeholder: "Search", class: "form-control mr-sm-2" %></p>
-        <label>Date Rent</label>
-        <%= date_field_tag "DateRent", :DateRent %>
-        <label>Date Return</label>
-        <%= date_field_tag "DateReturn", :DateReturn %>
-        <div>
+        <label>Available From</label>
+        <%= date_field_tag "Available_From", :available_from %>
+        <label>Available To</label>
+        <%= date_field_tag "Available_To", :available_to %>
         <%= button_tag "Search", :class => "btn btn-outline-success my-2 my-sm-0" %>
       <% end %>
   </nav>
