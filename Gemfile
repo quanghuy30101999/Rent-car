@@ -17,6 +17,8 @@ gem "jquery-rails", "4.3.1"
 gem "turbolinks", "5.0.1"
 gem "jbuilder", "2.7.0"
 gem "pg", "0.20.0"
+gem "momentjs-rails", ">= 2.9.0"
+gem "bootstrap3-datetimepicker-rails", "~> 4.17.47"
 gem "simplecov", require: false, group: :test
 
 group :development, :test do
