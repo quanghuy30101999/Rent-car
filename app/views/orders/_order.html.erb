@@ -3,9 +3,12 @@
     <%= order.name %></span></br>
     <span class="address"><label>Email:</label>
     <%= order.email %></span></br>
-    <span class="checkin_time"><label>Checkin Time:</label>
-    <span class="rental_period"><label>Rental Period:</label>
+    <span class="checkin_time"><label>Rent Time:</label>
+    <%= order.rent_time %></br>
+    <span class="checkin_time"><label>Return Time:</label>
+    <%= order.return_time %></br>
     <span class="order_status"> <label>Order Status:</label>
+    <%= order.orders_status %></br>
     <span class="timestamp"><label>Posted</label>
   <%= time_ago_in_words(order.created_at) %> ago.
 </span>

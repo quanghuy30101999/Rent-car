@@ -10,15 +10,36 @@
           <%= f.text_field :email %>
       </div>
       <label> Rent Date </label>
-        <div class="datetime">
-            <%= f.datetime_select :rent_time, id: :rent_time, :default => { :hour => Time.zone.now.hour, :minute => Time.zone.now.min } %>
+        <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <%= f.text_field :rent_time, class: "form-control" %>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+            <label> Return Date </label>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker2'>
+                    <%= f.text_field :return_time, class: "form-control" %>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+                <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker2').datetimepicker();
+            });
+        </script>
+            </div>
+             <%= f.submit "Order", class: "btn btn-primary" %>
         </div>
-        <label> Return Date </label>
-        <div class="datetime">
-            <%= f.datetime_select :return_time, id: :return_time, :default => { :hour => Time.zone.now.hour, :minute => Time.zone.now.min } %>
-        </div>
-        <%= f.submit "Order", class: "btn btn-primary" %>
-
+        
       </div>
       <br>
     </aside>

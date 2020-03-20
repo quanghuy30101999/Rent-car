@@ -22,7 +22,7 @@ module ApplicationHelper
 
   def user_oreded?(car_id)
     current_user.orders.any? do |order|
-      order.car_id == car_id
+      order.car_id == car_id && order.orders_status == "requesting"
     end
   end
 end

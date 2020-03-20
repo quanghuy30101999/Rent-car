@@ -1,2 +1,0 @@
-class AddRentTimeToOrder < ApplicationRecord
-end
