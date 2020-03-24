@@ -7,18 +7,17 @@
       <span class="color">Color : <%= car.color %></span><br>
       <span class="begin">Date Rent : <%= car.begin %></span><br>
       <span class="end">Date Return : <%= car.end %></span><br>
+      <span class="status">Status : <%= car.status %></span><br>
       <span class="timestamp">
         Posted <%= time_ago_in_words(car.created_at) %> ago.
       </span>
     </p>
+    <% if logged_in? && admin? %>
         <%= link_to "edit", edit_car_url(car), class: "btn btn-primary" %>
         <%= link_to "delete", car, class: "btn btn-primary", method: :delete,
                                    data: { confirm: "You sure?" } %>
-        <% if !logged_in? %>
-          <%= link_to "Detail", login_url, class: "btn btn-primary" %>
-        <% else %>
-          <%= link_to "Detail", car_path(car), class: "btn btn-primary" %>
         <% end %>
+        <%= link_to "Detail", car_path(car), class: "btn btn-primary" %>
   </div>
 </div>
 </li>

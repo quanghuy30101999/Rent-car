@@ -13,12 +13,12 @@ Rails.application.configure do
   config.consider_all_requests_local = true
 
   # Enable/disable caching. By default caching is disabled.
-  if Rails.root.join('tmp/caching-dev.txt').exist?
+  if Rails.root.join("tmp/caching-dev.txt").exist?
     config.action_controller.perform_caching = true
 
     config.cache_store = :memory_store
     config.public_file_server.headers = {
-      'Cache-Control' => "public, max-age=#{2.days.seconds.to_i}"
+      "Cache-Control" => "public, max-age=#{2.days.seconds.to_i}",
     }
   else
     config.action_controller.perform_caching = false
@@ -30,18 +30,18 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-  address: 'smtp.gmail.com',
-  port: 587,
-  domain:  'example.com',
-  user_name: ENV['gmail'],
-  password:  ENV['pass'],
-  authentication: 'plain',
-  enable_starttls_auto: true  
-}
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "example.com",
+    user_name: ENV["gmail"],
+    password: ENV["pass"],
+    authentication: "plain",
+    enable_starttls_auto: true,
+  }
   #host = 'example.com' # Don't use this literally; use your local dev host instead
   # Use this on the cloud IDE.
   #config.action_mailer.default_url_options = { host: = 'localhost:3000', protocol: 'https' }
-  default_url_options[:host] = 'localhost:3000'
+  default_url_options[:host] = "localhost:3000"
   config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.

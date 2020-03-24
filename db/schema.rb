@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200319092948) do
+ActiveRecord::Schema.define(version: 20200324020544) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,8 +32,6 @@ ActiveRecord::Schema.define(version: 20200319092948) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
     t.datetime "return_time"
     t.datetime "real_return_time"
     t.bigint "user_id"
@@ -42,6 +40,7 @@ ActiveRecord::Schema.define(version: 20200319092948) do
     t.datetime "updated_at", null: false
     t.datetime "rent_time"
     t.string "orders_status", default: "requesting"
+    t.integer "phone"
     t.index ["car_id"], name: "index_orders_on_car_id"
     t.index ["user_id", "created_at"], name: "index_orders_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -60,6 +59,9 @@ ActiveRecord::Schema.define(version: 20200319092948) do
     t.boolean "admin", default: false
     t.string "reset_digest"
     t.datetime "reset_sent_at"
+    t.integer "phone"
+    t.boolean "sex"
+    t.date "birthday"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

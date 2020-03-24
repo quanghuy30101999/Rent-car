@@ -11,12 +11,16 @@
           Posted <%= time_ago_in_words(@car.created_at) %> ago.
         </span>
       </p>
-      <% if !user_oreded?(@car.id) %>
-        <%= link_to "Order", new_car_order_path(@car), class: "btn btn-primary" %>
+      <% if logged_in? %>
+        <% if !user_oreded?(@car.id) %>
+          <%= link_to "Order", new_car_order_path(@car), class: "btn btn-primary" %>
         <% else %>
-        <%= link_to "Cancel", new_car_order_path(@car), class: "btn btn-primary" %>
-        <%= link_to "Checkout", new_car_order_path(@car), class: "btn btn-primary" %>
+          <%= link_to "Cancel", new_car_order_path(@car), class: "btn btn-primary" %>
+          <%= link_to "Checkout", new_car_order_path(@car), class: "btn btn-primary" %>
         <% end %>
+      <% else %>
+        <%= link_to "Order", login_path, class: "btn btn-primary" %>
+      <% end %>
     </div>
   </div>
 </div>

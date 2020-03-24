@@ -6,6 +6,18 @@
       <%= f.text_field :name, class: "form-control" %>      
       <%= f.label :email %>
       <%= f.email_field :email, class: "form-control" %>      
+      <%= f.label :sex %>
+      <div class="custom-control custom-radio radiomale">
+        <label class="custom-control-label radio-inline" for="defaultUnchecked">
+        <%= f.radio_button :sex, "true" %>
+        Male </label>
+        <label class="custom-control-label radio-inline" for="defaultUnchecked">
+        <%= f.radio_button :sex, "false" %>
+        Female </label>
+      </div>
+      <br>
+      <%= f.label :phone %>
+      <%= f.telephone_field :phone, class: "form-control" %>
       <%= f.label :password %>
       <%= f.password_field :password, class: "form-control" %>      
       <%= f.label :password_confirmation, "Confirmation" %>

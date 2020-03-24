@@ -1,16 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  email: 
+  phone: 0935270046
   return_time: 2020-03-18 14:04:27
   real_return_time: 2020-03-18 14:04:27
   user: one
   car: one
 
 two:
-  name: MyString
-  email: 
+  phone: 0935270046
   return_time: 2020-03-18 14:04:27
   real_return_time: 2020-03-18 14:04:27
   user: two

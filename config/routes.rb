@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   root "static_pages#home"
   get "/signup", to: "users#new"
   get "/search", to: "cars#index"
+  get "/orders", to: "orders#index"
+  resources :orders do
+    patch "/deny", to: "orders#deny"
+    patch "/approved" => "orders#approved"
+  end
   resources :users
   resources :account_activations
   resources :cars do

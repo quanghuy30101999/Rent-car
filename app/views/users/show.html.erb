@@ -3,13 +3,25 @@
   <aside class="col-md-4">
     <section class="user_info">
       <h1>
+      <lable> Name :</lable> 
         <%= @user.name %>
+        <br>
+        <br>
+        <lable> Email :</lable> 
+        <%= @user.email %>
+        <br>
+        <lable> Sex :</lable>
+        <%= show_sex(@user.sex) %>
+        <br>
+        <lable> Phone :</lable> 
+        <%= @user.phone %>
       </h1>
     </section>
-    
+      <% if admin? %>
       <section class="car_form">
         <%= render partial: "shared/car_form", locals: { btn: "Post" } %>
       </section>
+      <% end %>
   </aside>
   <div class="col-md-8">
     <% if @user.cars.any? %>
@@ -19,15 +31,5 @@
       </ol>
     <% end %>
   </div>
-
-  <div class="col-md-8">
-    <% if @user.orders.any? %>
-      <h3>Orders (<%= @user.orders.count %>)</h3>
-      <ol class="cars">
-        <%= render @user.orders %>
-      </ol>
-    <% end %>
-  </div>
-  
   </div>
 </div>

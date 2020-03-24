@@ -1,8 +1,10 @@
 <li id="order-<%= order.id %>">
   <span class="name_guest"> <label>Name:</label>
-    <%= order.name %></span></br>
+    <%= order.user.name %></span></br>
     <span class="address"><label>Email:</label>
-    <%= order.email %></span></br>
+    <%= order.user.email %></span></br>
+     <span class="address"><label>Phone:</label>
+    <%= order.phone %></span></br>
     <span class="checkin_time"><label>Rent Time:</label>
     <%= order.rent_time %></br>
     <span class="checkin_time"><label>Return Time:</label>
@@ -13,6 +15,9 @@
   <%= time_ago_in_words(order.created_at) %> ago.
 </span>
 </li>
-<span class="delete">
-  <p> <%= link_to "Cancel", [order.car, order], method: :delete, data: { confirm: "Are you sure" } %> </p>
+  <% if admin? && order_show(order.orders_status) %>
+    <p> <%= link_to "Deny", order_deny_path(order), class: "btn btn-primary", method: :patch %> 
+    </p>
+    <p> <%= link_to "approved", order_approved_path(order), class: "btn btn-primary", method: :patch %> </p>
+  <% end %>
 </span>
