@@ -9,15 +9,22 @@ class Order < ApplicationRecord
   validate :return_time_cannot_be_in_the_rent_time
   validates :rent_time, presence: true
   validates :return_time, presence: true
-  enum orders_status: { requesting: "requesting", approved: "approved", finished: "finished", deny: "deny" }
-  validates :orders_status, presence: true, inclusion: { in: %w(requesting approved finished deny) }
+  enum orders_status: { requesting: "requesting", approved: "approved", finished: "finished", deny: "deny", cancelled: "cancelled" }
+  validates :orders_status, presence: true, inclusion: { in: %w(requesting approved finished deny cancelled) }
+
+  def self.search_order(params)
+    @orders = Order.where(orders_status: params[:search_order]) if params[:search_order].present?
+  end
 
   private
 
   def checkin_time_cannot_be_in_the_past
-    if rent_time.present? && rent_time.past? && return_time.present? && return_time.past?
+    if (rent_time.present? && rent_time.past?)
       errors.add(:rent_time, "can't be in the past")
-      errors.add(:return_time, "can't be in the past")
+    else
+      if (return_time.present? && return_time.past?)
+        errors.add(:return_time, "can't be in the past")
+      end
     end
   end
 
