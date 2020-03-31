@@ -1,0 +1,21 @@
+<div class="thumbnail">
+<div class="card">
+  <span class="name_guest"> <label>Name:</label>
+    <%= @order.user.name %></span></br>
+    <span class="address"><label>Email:</label>
+    <%= @order.user.email %></span></br>
+     <span class="phone"><label>Phone:</label>
+     <%= @order.user.phone %></span></br>
+     <span class="phone"><label>Car Name:</label>
+    <%= @order.car.name %></span></br>
+    <span class="checkin_time"><label>Rent Time:</label>
+    <%= @order.rent_time %></br>
+    <span class="checkin_time"><label>Return Time:</label>
+    <%= @order.return_time %></br>
+    <span class="order_status"> <label>Order Status:</label>
+    <%= @order.orders_status %></br>
+    <span class="timestamp"><label>Posted</label>
+  <%= time_ago_in_words(@order.created_at) %> ago.
+</span>
+</div>
+</div>

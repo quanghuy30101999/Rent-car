@@ -6,13 +6,13 @@
       <%= f.text_field :name, class: "form-control" %>      
       <%= f.label :email %>
       <%= f.email_field :email, class: "form-control" %>      
-      <%= f.label :sex %>
+      <%= f.label :gender %>
       <div class="custom-control custom-radio radiomale">
         <label class="custom-control-label radio-inline" for="defaultUnchecked">
-        <%= f.radio_button :sex, "true" %>
+        <%= f.radio_button :gender, "true" %>
         Male </label>
         <label class="custom-control-label radio-inline" for="defaultUnchecked">
-        <%= f.radio_button :sex, "false" %>
+        <%= f.radio_button :gender, "false" %>
         Female </label>
       </div>
       <br>

@@ -1,3 +1,7 @@
+<div class="center jumbotron">
+  <h1> Detailed configuration   </h1>
+</div>
+<div class="flex">
  <div class= col-md-6 col-md-offset-3> 
   <div class="card">
     <div class="card-body">
@@ -12,15 +16,17 @@
         </span>
       </p>
       <% if logged_in? %>
-        <% if !user_oreded?(@car.id) %>
           <%= link_to "Order", new_car_order_path(@car), class: "btn btn-primary" %>
-        <% else %>
-          <%= link_to "Cancel", new_car_order_path(@car), class: "btn btn-primary" %>
-          <%= link_to "Checkout", new_car_order_path(@car), class: "btn btn-primary" %>
-        <% end %>
       <% else %>
         <%= link_to "Order", login_path, class: "btn btn-primary" %>
       <% end %>
     </div>
   </div>
+</div>
+<div>
+  <% @car.orders.each do |f| %>
+    <% @order = f %>
+    <%= render partial: "shared/order_info", locals: { object: @order } %>
+  <% end %>
+</div>
 </div>

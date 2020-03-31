@@ -1,10 +1,5 @@
 module UsersHelper
-  def show_sex(sex)
-    _sex = "Male"
-    if sex == true
-      "#{_sex}"
-    else
-      _sex = "Female"
-    end
+  def show_gender(gender)
+    (gender == true) ? _gender = "Male" : _gender = "Female"
   end
 end
