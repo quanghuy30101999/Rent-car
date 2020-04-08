@@ -1,30 +1,56 @@
 class OrdersController < ApplicationController
+  before_action :logged_in_user
+
   def index
-    @orders = Order.all
-    @orders = Order.search_order(params) if admin? && params[:search_order].present?
-    @group = Order.reorder(:orders_status).group(:orders_status).count if admin?
-    unless admin?
-      @orders = @orders.where(user_id: current_user.id)
+    @extension_orders = []
+    if admin?
+      @requesting = Order.where(status: "requesting")
+      @approved = Order.where(status: "approved")
+      @approved.each do |order|
+        @extension_orders += order.extension_orders
+      end
+      @order = Order.where("status = ? OR status = ? OR status = ?", "finished", "deny", "cancelled")
+      @orders = Order.search_order(params) if params[:search_order].present?
+      @group = Order.reorder(:status).group(:status).count
+      @group_extension = ExtensionOrder.reorder(:status).group(:status).count
+    else
+      @orders = Order.where(user_id: current_user.id)
+      @approved_orders = @orders.where(status: "approved")
+      @approved_orders.each do |order|
+        @extension_orders += order.extension_orders
+      end
+      @group = @orders.reorder(:status).group(:status).count
       @orders = @orders.search_order(params) if params[:search_order].present?
-      @group = @orders.reorder(:orders_status).group(:orders_status).count
     end
   end
 
   def new
     @car = Car.find(params[:car_id])
-    @order ||= Order.new
+    @order ||= Order.new(phone: current_user.phone)
+    @user = User.new
+  end
+
+  def edit
+    @order = Order.find(params[:id])
   end
 
   def update
+    @order = Order.find(params[:id])
+    if @order.update(order_params)
+      flash[:success] = "Update success"
+      redirect_to orders_path
+    else
+      render "orders/edit"
+    end
   end
 
   def cancelled
-    @order = Order.find_by(id: params[:order_id])
+    @order = Order.find(params[:order_id])
     @car = @order.car
     @order.cancelled!
     @car.update(status: "available", begin: nil, end: nil)
     @orders = Order.all
-    redirect_to current_user
+    redirect_to orders_path
   end
 
   def create
@@ -33,10 +59,10 @@ class OrdersController < ApplicationController
     unless check_day(params)
       if !check_order(params)
         @order.user_id = current_user.id
-        if @order.save
+        if @order.save!
           @car.update(status: "ordered", begin: @order.rent_time, end: @order.return_time)
           flash[:success] = "Order created!"
-          redirect_to current_user
+          redirect_to orders_path
         else
           render "orders/new"
         end
@@ -51,21 +77,19 @@ class OrdersController < ApplicationController
   end
 
   def deny
-    @order = Order.find_by(id: params[:order_id])
+    @order = Order.find(params[:order_id])
     @car = @order.car
     @order.deny!
     @car.update(status: "available", begin: nil, end: nil)
-    @orders = Order.all
-    render "orders/index"
+    redirect_to orders_path
   end
 
   def approved
-    @order = Order.find_by(id: params[:order_id])
+    @order = Order.find(params[:order_id])
     @car = @order.car
     @order.approved!
     @car.rented!
-    @orders = Order.all
-    render "orders/index"
+    redirect_to orders_path
   end
 
   def destroy
@@ -73,7 +97,7 @@ class OrdersController < ApplicationController
     @order = @car.orders.destroy(params[:id])
     @car.available!
     flash[:success] = "Order deleted"
-    redirect_to current_user
+    redirect_to orders_path
   end
 
   private

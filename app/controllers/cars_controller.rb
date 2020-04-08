@@ -9,7 +9,7 @@ class CarsController < ApplicationController
   end
 
   def show
-    @car = Car.find_by(id: params[:id])
+    @car = Car.find(params[:id])
   end
 
   def create
