@@ -4,6 +4,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:michael)
     @user1 = users(:michael1)
+    @user2 = users(:michael2)
   end
 
   test "login with invalid information" do
@@ -40,7 +41,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
 
   test "login with account not active" do
     get login_path
-    post login_path, params: { session: { email: @user1.email,
+    post login_path, params: { session: { email: @user2.email,
                                          password: "password" } }
     assert_not flash.empty?
     get root_path

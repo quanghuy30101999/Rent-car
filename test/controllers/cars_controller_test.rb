@@ -97,7 +97,7 @@ class CarsControllerTest < ActionDispatch::IntegrationTest
     get search_path, params: { search: "", available_from: "", available_to: "" }
     assert_select "h5" do
       assert_select "span#name"
-      assert_select "span", 5
+      assert_select "span", 6
     end
     assert_template "static_pages/home"
   end
@@ -106,7 +106,7 @@ class CarsControllerTest < ActionDispatch::IntegrationTest
     get search_path, params: { search: "Toyota", available_from: "", available_to: "" }
     assert_select "h5" do
       assert_select "span#name"
-      assert_select "span", 2
+      assert_select "span", 3
     end
     assert_template "static_pages/home"
   end

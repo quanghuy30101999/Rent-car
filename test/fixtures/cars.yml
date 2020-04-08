@@ -37,3 +37,11 @@ huy1:
   user: michael
   begin: "2020-03-04"
   end: "2020-03-10"
+huy2:
+  name: Toyota
+  year: 1982
+  color: Blue
+  price: 1000
+  user: michael2
+  begin: "2020-03-04"
+  end: "2020-03-10"

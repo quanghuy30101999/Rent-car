@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200324020544) do
+ActiveRecord::Schema.define(version: 20200404025459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,17 @@ ActiveRecord::Schema.define(version: 20200324020544) do
     t.index ["user_id"], name: "index_cars_on_user_id"
   end
 
+  create_table "extension_orders", force: :cascade do |t|
+    t.bigint "order_id"
+    t.datetime "return_time"
+    t.string "status", default: "requesting"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "rent_time"
+    t.index ["order_id", "created_at"], name: "index_extension_orders_on_order_id_and_created_at"
+    t.index ["order_id"], name: "index_extension_orders_on_order_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.datetime "return_time"
     t.datetime "real_return_time"
@@ -39,8 +50,10 @@ ActiveRecord::Schema.define(version: 20200324020544) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "rent_time"
-    t.string "orders_status", default: "requesting"
+    t.string "status", default: "requesting"
     t.integer "phone"
+    t.datetime "request_date"
+    t.datetime "last_update"
     t.index ["car_id"], name: "index_orders_on_car_id"
     t.index ["user_id", "created_at"], name: "index_orders_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -60,12 +73,12 @@ ActiveRecord::Schema.define(version: 20200324020544) do
     t.string "reset_digest"
     t.datetime "reset_sent_at"
     t.integer "phone"
-    t.boolean "sex"
-    t.date "birthday"
+    t.boolean "gender"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "cars", "users"
+  add_foreign_key "extension_orders", "orders"
   add_foreign_key "orders", "cars"
   add_foreign_key "orders", "users"
 end
