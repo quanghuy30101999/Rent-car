@@ -1,19 +1,8 @@
-<div class="center jumbotron">
-  <h1> New Order </h1>
-</div>
-<div class="flex1">
-  <% car = get_car(params) %>
-  <%= render partial: "shared/car_info", locals: { :car => car } %>
-<div class= "col-md-10 col-md-offset-3">
-  <%= form_for(@order, url: car_orders_url(car)) do |f| %>
+<%= form_for(@order) do |f| %>
   <%= render "shared/error_messages", object: f.object %>
   <div class="row">
     <aside class="col-md-6">
       <div class="form-group">
-          <% if current_user.admin? %>
-            <label>Name<label>
-            <%= text_field_tag :name %>
-          <% end %>
           <label> Phone </label>
           <%= f.telephone_field :phone %>
       </div>
@@ -45,7 +34,7 @@
             });
         </script>
             </div>
-             <%= f.submit "Order", class: "btn btn-primary" %>
+             <%= f.submit submit, class: "btn btn-primary" %>
         </div>
         
       </div>
@@ -53,6 +42,3 @@
     </aside>
   </div>
 <% end %>
-</div>
-</div>
-</div>

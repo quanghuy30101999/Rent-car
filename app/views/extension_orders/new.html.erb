@@ -1,0 +1,22 @@
+<div class="center jumbotron">
+  <h1> Extension</h1>
+</div>
+<%= render partial: "shared/order_info", locals: { object: @order } %>
+<%= form_for(@order_extension, url: order_extension_orders_path(@order)) do |f| %>
+    <%= render "shared/error_messages", object: f.object %>
+    <label> Available To </label>
+      <div class="form-group">
+        <div class='input-group date' id='datetimepicker2'>
+          <%= f.text_field :return_time, class: "form-control" %>
+          <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+        <script type="text/javascript">
+          $(function () {
+              $('#datetimepicker2').datetimepicker();
+          });
+        </script>
+    <%= f.submit "確認", class: "btn btn-primary" %>
+    </div>
+<% end %>

@@ -1,1 +1,37 @@
-<%= render @orders %>
+<div class="center jumbotron">
+  <h1> List Order</h1>
+</div>
+    <% @group.each do |key, value| %>
+      <p><lable>Status : <%= value %> <%= key %></lable><p>
+    <% end %>
+
+    <div class="row">
+      <%= form_tag(orders_path, :method => "get", class: "navbar-form navbar-left") do %>
+        <%= select_tag :search_order, options_for_select(Order.statuses.to_a, params[:search_order]), onchange: "this.form.submit();", include_blank: "Search order home", class: "form-control" %>
+      <% end %>
+    </div>
+  <% if @group_extension.present? %>
+  <% @group_extension.each do |key, value| %>
+    <p><lable>Status : <%= value %> <%= key %></lable><p>
+  <% end %>
+  <div class="row">
+    <%= form_tag(orders_path, :method => "get", class: "navbar-form navbar-left") do %>
+      <%= select_tag :search_order, options_for_select(ExtensionOrder.statuses.to_a, params[:search_order]), onchange: "this.form.submit();", include_blank: "Extension Order", class: "form-control" %>
+    <% end %>
+  </div>
+  <% end %>
+<div class="flex">
+    <% if admin? %>
+      <% if params[:search_order].blank? %>
+        <%= render @requesting %>
+          <%= render partial: "extension_orders/extension_order", locals: { object: @extension_orders } %>
+        <%= render @approved %>
+        <%= render @order %>
+      <% else %>
+        <%= render @orders %>
+      <% end %>
+    <% else %>
+        <%= render partial: "extension_orders/extension_order", locals: { object: @extension_orders } %>
+        <%= render @orders %>
+    <% end %>
+</div>

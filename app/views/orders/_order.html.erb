@@ -1,23 +1,49 @@
+<div class="thumbnail">
+<div class="card">
 <li id="order-<%= order.id %>">
-  <span class="name_guest"> <label>Name:</label>
+  <% if order.requesting? %>
+  <span class="name_guest_requesting"> <label>Name:</label>
+  <% elsif order.approved? %>
+  <span class="name_guest_approve"> <label>Name:</label>
+  <% end %>
     <%= order.user.name %></span></br>
     <span class="address"><label>Email:</label>
     <%= order.user.email %></span></br>
-     <span class="address"><label>Phone:</label>
-    <%= order.phone %></span></br>
+     <span class="phone"><label>Phone:</label>
+     <%= order.user.phone %></span></br>
+     <span class="phone"><label>Car Name:</label>
+    <%= order.car.name %></span></br>
     <span class="checkin_time"><label>Rent Time:</label>
     <%= order.rent_time %></br>
     <span class="checkin_time"><label>Return Time:</label>
-    <%= order.return_time %></br>
+    <% if check_extension_orders(order.id) %>
+      <% extension_orders = get_order_parent(order.id) %>
+      <%= extension_orders.return_time %></br>
+    <% else %>
+      <%= order.return_time %></br>
+    <% end %>
     <span class="order_status"> <label>Order Status:</label>
-    <%= order.orders_status %></br>
+    <%= order.status %></br>
     <span class="timestamp"><label>Posted</label>
   <%= time_ago_in_words(order.created_at) %> ago.
 </span>
 </li>
-  <% if admin? && order_show(order.orders_status) %>
+  <% if admin? %>
+    <% if order_show(order.status) %>
     <p> <%= link_to "Deny", order_deny_path(order), class: "btn btn-primary", method: :patch %> 
     </p>
-    <p> <%= link_to "approved", order_approved_path(order), class: "btn btn-primary", method: :patch %> </p>
+    <p> <%= link_to "Approved", order_approved_path(order), class: "btn btn-primary", method: :patch %> </p>
+    <p> <%= link_to "Edit", edit_order_path(order), class: "btn btn-primary" %> </p>
+    <% end %>
+  <% else %>
+    <% if check_oders_status(order.status) && !hide_extension(order.id) %>
+      <%= link_to "Extension", new_order_extension_order_path(order), class: "btn btn-primary" %>
+    <% end %>
+    <% if order.requesting? %>
+      <p> <%= link_to "Cancel", order_cancel_path(order), class: "btn btn-primary", method: :patch %> 
+      <p> <%= link_to "Edit", edit_order_path(order), class: "btn btn-primary" %> </p>
+    <% end %>
   <% end %>
 </span>
+</div>
+</div>

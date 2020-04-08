@@ -1,0 +1,35 @@
+<% @extension_orders.each do |order_extension| %>
+<div class="thumbnail">
+  <div class="card">
+    <% order = get_car_to_order_extension(order_extension.order_id) %>
+    <li id="order-<%= order.id %>">
+    <span class="name_guest"> <label>Name:</label>
+    <%= order.user.name %></span></br>
+    <span class="address"><label>Email:</label>
+    <%= order.user.email %></span></br>
+     <span class="phone"><label>Phone:</label>
+     <%= order.user.email %></span></br>
+     <span class="phone"><label>Car Name:</label>
+    <%= order.car.name %></span></br>
+    <span class="checkin_time"><label>Rent Time:</label>
+    <%= order.rent_time %></br>
+    <span class="checkin_time"><label>Return Time:</label>
+    <%= order_extension.return_time %></br>
+    <span class="order_status"> <label>Order Status:</label>
+    <%= order_extension.status %></br>
+    <span class="timestamp"><label>Posted</label>
+  <%= time_ago_in_words(order_extension.created_at) %> ago.
+  <% if admin? %>
+    <% if order_show(order_extension.status) %>
+    <p> <%= link_to "Deny", extension_order_deny_url(order_extension), class: "btn btn-primary", method: :patch %> 
+    </p>
+    <p> <%= link_to "Approved", extension_order_approved_url(order_extension), class: "btn btn-primary", method: :patch %> </p>
+    <% end %>
+  <% else %>
+    <% if order_extension.requesting? %>
+      <p> <%= link_to "Cancel", extension_order_cancel_path(order_extension), class: "btn btn-primary", method: :patch %> 
+    <% end %>
+  <% end %>
+  </div>
+</div>
+<% end %>

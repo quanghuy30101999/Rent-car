@@ -2,14 +2,14 @@
   <div class="card">
   <div class="card-body">
     <h5 class="card-title"><span id="name">Name : <%= @car.name %></span><br></h5>
-    <p class="card-text"><span class="year">Year  : <%= car.year %></span><br>
-      <span>Price :<%= format_currency(car.price, car.price_unit) %></span><br>
-      <span class="color">Color : <%= car.color %></span><br>
-      <span class="begin">Date Rent : <%= car.begin %></span><br>
-      <span class="end">Date Return : <%= car.end %></span><br>
-      <span class="status">Status : <%= car.status %></span><br>
+    <p class="card-text"><span class="year">Year  : <%= @car.year %></span><br>
+      <span>Price :<%= format_currency(@car.price, @car.price_unit) %></span><br>
+      <span class="color">Color : <%= @car.color %></span><br>
+      <span class="begin">Date Rent : <%= @car.begin %></span><br>
+      <span class="end">Date Return : <%= @car.end %></span><br>
+      <span class="status">Status : <%= @car.status %></span><br>
       <span class="timestamp">
-        Posted <%= time_ago_in_words(car.created_at) %> ago.
+        Posted <%= time_ago_in_words(@car.created_at) %> ago.
       </span>
     </p>
   </div>

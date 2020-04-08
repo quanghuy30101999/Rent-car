@@ -13,7 +13,7 @@
     <span class="checkin_time"><label>Return Time:</label>
     <%= @order.return_time %></br>
     <span class="order_status"> <label>Order Status:</label>
-    <%= @order.orders_status %></br>
+    <%= @order.status %></br>
     <span class="timestamp"><label>Posted</label>
   <%= time_ago_in_words(@order.created_at) %> ago.
 </span>
