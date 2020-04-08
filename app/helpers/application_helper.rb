@@ -11,8 +11,7 @@ module ApplicationHelper
   end
 
   def format_currency(price, price_unit)
-    price_symbol = (price_unit == "USD") ? "$" : "đ"
-    (price_unit == "USD") ? "#{price_symbol}#{price}" : "#{price}#{price_symbol}"
+    (price_unit == "USD") ? "$#{price}" : "#{price}đ"
   end
 
   def user_oreded?(car_id)
