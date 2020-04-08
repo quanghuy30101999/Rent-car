@@ -267,7 +267,12 @@ span.picture {
   min-width: 40%;
   border-radius: 5px;
 }
-
+.name_guest_requesting{
+  background-color: red;
+}
+.name_guest_approve{
+  background-color: seagreen;
+}
 .thumbnail-description {
   min-height: 40px;
 }
