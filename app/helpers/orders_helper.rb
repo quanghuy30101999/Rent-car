@@ -25,7 +25,7 @@ module OrdersHelper
     Car.find_by(id: params[:car_id])
   end
 
-  def check_order_
+  def check_order_in_one_day
     current_user.orders.any? do |order|
       order.approved? && (Time.now.to_date - order.created_at.to_date).to_i < 1
     end
