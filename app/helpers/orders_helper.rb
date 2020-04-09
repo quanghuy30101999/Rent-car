@@ -17,12 +17,8 @@ module OrdersHelper
     end
   end
 
-  def order_show(status)
-    status != "deny" && status != "approved" && status != "cancelled"
-  end
-
-  def check_oders_status(status)
-    status == "approved"
+  def check_oders_status(order)
+    order.approved?
   end
 
   def get_car(params)
@@ -33,34 +29,5 @@ module OrdersHelper
     current_user.orders.any? do |order|
       order.approved? && (Time.now.to_date - order.created_at.to_date).to_i < 1
     end
-  end
-
-  def hide_extension(order_id)
-    order = Order.find(order_id)
-    order.extension_orders.any? do |extension_orders|
-      extension_orders.requesting?
-    end
-  end
-
-  def check_extension_orders(order_id)
-    order = Order.find(order_id)
-    order.extension_orders.any? do |extension_orders|
-      extension_orders.approved?
-    end
-  end
-
-  def get_order_parent(order_id)
-    order = Order.find(order_id)
-    extension_order = []
-    order.extension_orders.each do |extension_orders|
-      extension_order.push(extension_orders) if extension_orders.approved?
-    end
-    max_return_time = Time.now
-    orders = []
-    extension_order.each do |order|
-      orders = order if order.return_time > max_return_time
-      max_return_time = order.return_time
-    end
-    orders
   end
 end

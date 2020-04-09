@@ -16,6 +16,38 @@ class Order < ApplicationRecord
     @orders = Order.where(status: params[:search_order]) if params[:search_order].present?
   end
 
+  def check_extension_orders
+    order = Order.find(id)
+    order.extension_orders.any? do |extension_orders|
+      extension_orders.approved?
+    end
+  end
+
+  def check_extension_orders_approved
+    order = Order.find(id)
+    order.extension_orders.each do |extension_orders|
+      @extension_order = extension_orders if extension_orders.approved?
+    end
+    @extension_order
+  end
+
+  def order_show
+    order = Order.find(id)
+    order.status != "deny" && order.status != "approved" && order.status != "cancelled" && order.status != "finished"
+  end
+
+  def hide_extension
+    order = Order.find(id)
+    order.extension_orders.any? do |extension_orders|
+      extension_orders.requesting?
+    end
+  end
+
+  def get_order_parent
+    order = Order.find(id)
+    extension_order = order.extension_orders.select { |order_extension| order_extension.approved? }
+  end
+
   private
 
   def checkin_time_cannot_be_in_the_past

@@ -18,8 +18,11 @@ class ExtensionOrdersController < ApplicationController
 
   def approved
     @extension_order = ExtensionOrder.find(params[:extension_order_id])
-    @extension_order.approved!
     @order = @extension_order.order
+    if @extension_orders = @order.check_extension_orders_approved
+      @extension_orders.finished!
+    end
+    @extension_order.approved!
     @order.update(request_date: @extension_order.return_time)
     redirect_to orders_path
   end
