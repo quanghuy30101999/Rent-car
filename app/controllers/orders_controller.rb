@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
       @approved.each do |order|
         @extension_orders += order.extension_orders
       end
-      @order = Order.where("status = ? OR status = ? OR status = ?", "finished", "deny", "cancelled")
+      @order = Order.where("status = ? OR status = ? OR status = ?", "finished", "denied", "cancelled")
       @orders = Order.search_order(params) if params[:search_order].present?
       @group = Order.reorder(:status).group(:status).count
       @group_extension = ExtensionOrder.reorder(:status).group(:status).count
@@ -79,7 +79,7 @@ class OrdersController < ApplicationController
   def deny
     @order = Order.find(params[:order_id])
     @car = @order.car
-    @order.deny!
+    @order.denied!
     @car.update(status: "available", begin: nil, end: nil)
     redirect_to orders_path
   end

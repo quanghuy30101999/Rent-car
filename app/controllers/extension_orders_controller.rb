@@ -12,7 +12,7 @@ class ExtensionOrdersController < ApplicationController
 
   def deny
     @extension_order = ExtensionOrder.find(params[:extension_order_id])
-    @extension_order.deny!
+    @extension_order.denied!
     redirect_to orders_path
   end
 

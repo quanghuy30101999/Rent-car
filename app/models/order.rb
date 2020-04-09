@@ -10,8 +10,8 @@ class Order < ApplicationRecord
   validate :return_time_cannot_be_in_the_rent_time
   validates :rent_time, presence: true
   validates :return_time, presence: true
-  enum status: { requesting: "requesting", approved: "approved", finished: "finished", deny: "deny", cancelled: "cancelled" }
-  validates :status, presence: true, inclusion: { in: %w(requesting approved finished deny cancelled) }
+  enum status: { requesting: "requesting", approved: "approved", finished: "finished", denied: "denied", cancelled: "cancelled" }
+  validates :status, presence: true, inclusion: { in: %w(requesting approved finished denied cancelled) }
   def self.search_order(params)
     @orders = Order.where(status: params[:search_order]) if params[:search_order].present?
   end
@@ -33,7 +33,7 @@ class Order < ApplicationRecord
 
   def order_show
     order = Order.find(id)
-    order.status != "deny" && order.status != "approved" && order.status != "cancelled" && order.status != "finished"
+    order.status != "denied" && order.status != "approved" && order.status != "cancelled" && order.status != "finished"
   end
 
   def hide_extension
