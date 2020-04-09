@@ -29,7 +29,6 @@ class ExtensionOrdersController < ApplicationController
     @car = @order.car
     @order_extension = @order.extension_orders.build(order_extension_params)
     if @order_extension.save
-      byebug
       flash[:success] = "Order created!"
       redirect_to orders_path
     else
