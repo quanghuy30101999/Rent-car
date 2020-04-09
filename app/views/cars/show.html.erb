@@ -16,7 +16,7 @@
         </span>
       </p>
       <% if logged_in? %>
-          <% if check_order_ == false || admin? %>
+          <% if check_order_in_one_day == false || admin? %>
             <%= link_to "Order", new_car_order_path(@car), class: "btn btn-primary" %>
           <% end %>
       <% else %>
